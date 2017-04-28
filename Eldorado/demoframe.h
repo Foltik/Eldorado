@@ -28,6 +28,4 @@ private:
 
 	Shader* shader;
 	GLuint vao;
-
-	int initGraphics = 0;
 };
