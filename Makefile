@@ -1,6 +1,6 @@
 CC = clang++
 
-LIBFLAGS = -lGL -lGLEW -lglfw -l:k5.a
+LIBFLAGS = -lGL -lGLEW -lglfw -l:k5.a -lSOIL
 FLAGS = -Wall -std=c++11
 DBGFLAGS = -Wall -ggdb3 -std=c++11
 
