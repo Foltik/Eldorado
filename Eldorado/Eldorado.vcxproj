@@ -110,11 +110,12 @@
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
-      <AdditionalDependencies>k5.lib;opengl32.lib;glew32s.lib;glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>k5.lib;opengl32.lib;glew32s.lib;glfw3.lib;SOIL.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalOptions>/ignore:4049 %(AdditionalOptions)</AdditionalOptions>
     </Link>
     <PostBuildEvent>
-      <Command>robocopy "$(SolutionDir)$(ProjectName)\shaders" "$(SolutionDir)$(Platform)\$(Configuration)\shaders" /e /njh /nc /ns</Command>
+      <Command>xcopy "$(SolutionDir)$(ProjectName)\shaders" "$(SolutionDir)$(Platform)\$(Configuration)\shaders" /e /i /y
+xcopy "$(SolutionDir)$(ProjectName)\textures" "$(SolutionDir)$(Platform)\$(Configuration)\textures" /e /i /y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
