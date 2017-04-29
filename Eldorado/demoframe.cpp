@@ -142,5 +142,5 @@ void CDemoFrame::Render() {
 	glDrawArrays(GL_TRIANGLES, 0, 36);
 	glBindVertexArray(0);
 
-	glfwSwapBuffers(engine->wnd);
+	glFlush();
 }
