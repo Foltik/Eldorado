@@ -30,26 +30,32 @@ protected:
 private:
 	static CDemoFrame pInstance;
 
+	glm::mat4 lmodel;
+
 	glm::mat4 model;
 	glm::mat4 view;
 	glm::mat4 proj;
 
 	float cameraSpeed = 0.03f;
-	glm::vec3 cameraPos = glm::vec3(0.0f, 0.0f, 3.0f);
+	glm::vec3 cameraPos = glm::vec3(0.0f, 0.0f, 3.5f);
 	glm::vec3 cameraFront = glm::vec3(0.0f, 0.0f, -1.0f);
 	glm::vec3 cameraUp = glm::vec3(0.0f, 1.0f, 0.0f);
 
 	float pitch = 0.0f;
 	float yaw = -90.0f;
-	double lastX = 400, lastY = 300;
+	double lastX, lastY;
 	double sensitivity = 0.020;
 
 	GLuint tex;
-	GLuint tex2;
 
 	Shader* shader;
+	Shader* lshader;
 
-	GLuint ebo;
+	glm::vec3 lightPos;
+
+	GLuint lvao;
+	GLuint lvbo;
+
 	GLuint vao;
 	GLuint vbo;
 };

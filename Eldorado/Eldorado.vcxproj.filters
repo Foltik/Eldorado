@@ -37,5 +37,11 @@
     <None Include="shaders\shader.frag">
       <Filter>Resource Files\Shaders</Filter>
     </None>
+    <None Include="shaders\lamp.vert">
+      <Filter>Resource Files\Shaders</Filter>
+    </None>
+    <None Include="shaders\lamp.frag">
+      <Filter>Resource Files\Shaders</Filter>
+    </None>
   </ItemGroup>
 </Project>
