@@ -34,6 +34,8 @@ $(BUILDDIR)/linux/debug/obj/%.o: Eldorado/%.cpp
 resource:
 	cp -r Eldorado/shaders $(BUILDDIR)/linux/release
 	cp -r Eldorado/shaders $(BUILDDIR)/linux/debug
+	cp -r Eldorado/textures $(BUILDDIR)/linux/release
+	cp -r Eldorado/textures $(BUILDDIR)/linux/debug
 
 clean:
 	rm -rf build
