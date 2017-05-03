@@ -45,8 +45,8 @@ private:
 	float yaw = -90.0f;
 	double lastX, lastY;
 	double sensitivity = 0.020;
-
-	GLuint tex;
+	
+	Texture* textureCrate;
 
 	Shader* shader;
 	Shader* lshader;

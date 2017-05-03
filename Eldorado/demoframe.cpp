@@ -10,15 +10,7 @@ void CDemoFrame::Init() {
 	lshader = new Shader("./shaders/lamp.vert", "./shaders/lamp.frag");
 
 	// Load texture
-	int w, h;
-	unsigned char* img;
-	glGenTextures(1, &tex);
-	glBindTexture(GL_TEXTURE_2D, tex);
-	img = SOIL_load_image("textures/metalcrate.jpg", &w, &h, 0, SOIL_LOAD_RGB);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, w, h, 0, GL_RGB, GL_UNSIGNED_BYTE, img);
-	glGenerateMipmap(GL_TEXTURE_2D);
-	SOIL_free_image_data(img);
-	glBindTexture(GL_TEXTURE_2D, 0);
+	textureCrate = new Texture("textures/metalcrate.jpg");
 
 	// Vertex Data
 	GLfloat cube[] = {
@@ -202,8 +194,7 @@ void CDemoFrame::Render() {
 	glUniform3f(glGetUniformLocation(shader->program, "viewPos"), cameraPos.x, cameraPos.y, cameraPos.z);
 
 	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D, tex);
-	glUniform1i(glGetUniformLocation(shader->program, "tex"), 0);
+	textureCrate->Use();
 
 	glBindVertexArray(vao);
 	glDrawArrays(GL_TRIANGLES, 0, 36);
