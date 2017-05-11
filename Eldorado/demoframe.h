@@ -47,6 +47,7 @@ private:
 	double sensitivity = 0.020;
 	
 	Model* testModel;
+	Model* lampModel;
 
 	Shader* shader;
 	Shader* lshader;

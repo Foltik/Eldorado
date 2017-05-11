@@ -9,64 +9,9 @@ void CDemoFrame::Init() {
 	shader = new Shader("./shaders/shader.vert", "./shaders/shader.frag");
 	lshader = new Shader("./shaders/lamp.vert", "./shaders/lamp.frag");
 
-	// Load model
-	testModel = new Model("models/HUMAN.blend");
-	
-	GLfloat lamp[] = {
-		-0.5f, -0.5f, -0.5f,
-		0.5f, -0.5f, -0.5f,
-		0.5f,  0.5f, -0.5f,
-		0.5f,  0.5f, -0.5f,
-		-0.5f,  0.5f, -0.5f,
-		-0.5f, -0.5f, -0.5f,
-
-		-0.5f, -0.5f,  0.5f,
-		0.5f, -0.5f,  0.5f,
-		0.5f,  0.5f,  0.5f,
-		0.5f,  0.5f,  0.5f,
-		-0.5f,  0.5f,  0.5f,
-		-0.5f, -0.5f,  0.5f,
-
-		-0.5f,  0.5f,  0.5f,
-		-0.5f,  0.5f, -0.5f,
-		-0.5f, -0.5f, -0.5f,
-		-0.5f, -0.5f, -0.5f,
-		-0.5f, -0.5f,  0.5f,
-		-0.5f,  0.5f,  0.5f,
-
-		0.5f,  0.5f,  0.5f,
-		0.5f,  0.5f, -0.5f,
-		0.5f, -0.5f, -0.5f,
-		0.5f, -0.5f, -0.5f,
-		0.5f, -0.5f,  0.5f,
-		0.5f,  0.5f,  0.5f,
-
-		-0.5f, -0.5f, -0.5f,
-		0.5f, -0.5f, -0.5f,
-		0.5f, -0.5f,  0.5f,
-		0.5f, -0.5f,  0.5f,
-		-0.5f, -0.5f,  0.5f,
-		-0.5f, -0.5f, -0.5f,
-
-		-0.5f,  0.5f, -0.5f,
-		0.5f,  0.5f, -0.5f,
-		0.5f,  0.5f,  0.5f,
-		0.5f,  0.5f,  0.5f,
-		-0.5f,  0.5f,  0.5f,
-		-0.5f,  0.5f, -0.5f
-	};
-
-	// Generate buffers and store data for lamp
-	glGenVertexArrays(1, &lvao);
-	glGenBuffers(1, &lvbo);
-
-	glBindVertexArray(lvao);
-	glBindBuffer(GL_ARRAY_BUFFER, lvbo);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(lamp), lamp, GL_STATIC_DRAW);
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), (GLvoid*)0);
-	glEnableVertexAttribArray(0);
-	glBindVertexArray(0);
-
+	// Load models
+	testModel = new Model("models/human.blend");	
+	lampModel = new Model("models/lamp.blend");
 
 	// Set up rendering matrices
 	proj = glm::perspective(45.0f, 800.0f / 600.0f, 0.1f, 100.0f);
@@ -156,9 +101,7 @@ void CDemoFrame::Render() {
 	lshader->uMatrix4("lproj", proj);
 
 	// Draw the light
-	glBindVertexArray(lvao);
-	glDrawArrays(GL_TRIANGLES, 0, 36);
-	glBindVertexArray(0);
+	lampModel->Draw(lshader);
 
 
 
