@@ -46,17 +46,13 @@ private:
 	double lastX, lastY;
 	double sensitivity = 0.020;
 	
-	Texture* textureCrate;
-	Model* teapot;
+	Model* testModel;
 
 	Shader* shader;
 	Shader* lshader;
 
-	glm::vec3 lightPos;
+	glm::vec3 lightPos = glm::vec3(1.2f, 1.0f, 1.5f);
 
 	GLuint lvao;
 	GLuint lvbo;
-
-	GLuint vao;
-	GLuint vbo;
 };
