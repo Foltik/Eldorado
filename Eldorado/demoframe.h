@@ -31,6 +31,7 @@ private:
 	static CDemoFrame pInstance;
 
 	glm::mat4 lmodel;
+	glm::vec3 lightPos = glm::vec3(1.2f, 1.0f, 1.5f);
 
 	glm::mat4 model;
 	glm::mat4 view;
@@ -51,9 +52,4 @@ private:
 
 	Shader* shader;
 	Shader* lshader;
-
-	glm::vec3 lightPos = glm::vec3(1.2f, 1.0f, 1.5f);
-
-	GLuint lvao;
-	GLuint lvbo;
 };
