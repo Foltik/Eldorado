@@ -47,6 +47,7 @@ private:
 	double sensitivity = 0.020;
 	
 	Texture* textureCrate;
+	Model* teapot;
 
 	Shader* shader;
 	Shader* lshader;

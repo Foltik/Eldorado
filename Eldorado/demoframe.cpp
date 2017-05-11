@@ -12,6 +12,8 @@ void CDemoFrame::Init() {
 	// Load texture
 	textureCrate = new Texture("textures/metalcrate.jpg");
 
+	teapot = new Model("models/teapot.nff");
+
 	// Vertex Data
 	GLfloat cube[] = {
 		-0.5f, -0.5f, -0.5f,  0.0f, 0.0f,  0.0f,  0.0f, -1.0f,
@@ -126,7 +128,7 @@ void CDemoFrame::Init() {
 	glEnableVertexAttribArray(0);
 	glBindVertexArray(0);
 
-	// Set up matricies
+	// Set up matrices
 	proj = glm::perspective(45.0f, 800.0f / 600.0f, 0.1f, 100.0f);
 	model = glm::rotate(model, glm::radians(-55.0f), glm::vec3(1.0f, 0.0f, 0.0f));
 	view = glm::translate(view, glm::vec3(0.0f, 0.0f, -3.0f));
@@ -193,12 +195,13 @@ void CDemoFrame::Render() {
 	glUniform3f(glGetUniformLocation(shader->program, "lightPos"), lightPos.x, lightPos.y, lightPos.z);
 	glUniform3f(glGetUniformLocation(shader->program, "viewPos"), cameraPos.x, cameraPos.y, cameraPos.z);
 
-	glActiveTexture(GL_TEXTURE0);
-	textureCrate->Use();
+	//glActiveTexture(GL_TEXTURE0);
+	//textureCrate->Use();
 
-	glBindVertexArray(vao);
-	glDrawArrays(GL_TRIANGLES, 0, 36);
-	glBindVertexArray(0);
+	//glBindVertexArray(vao);
+	//glDrawArrays(GL_TRIANGLES, 0, 36);
+	//glBindVertexArray(0);
+	teapot->Draw(shader);
 
 	// Draw the light
 	glUseProgram(lshader->program);
