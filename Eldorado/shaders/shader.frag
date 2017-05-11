@@ -24,5 +24,5 @@ void main() {
 	float specImpact = pow(max(dot(viewDir, reflectDir), 0.0), 128) * specularStrength;
 	vec4 specular = vec4(specImpact * lightColor, 1.0f);
 
-	color = (ambient + diffuse + specular) * texture(tex, TexCoord);
+	color = (ambient + diffuse + specular) * vec4(0.8f, 0.8f, 0.8f, 1.0f); //texture(tex, TexCoord);
 }
