@@ -10,22 +10,22 @@
 
 class CDemoFrame : public CFrame{
 public:
-	void Init();
-	void Cleanup();
+	virtual void Init() override;
+	virtual void Cleanup() override;
 
-	void Pause();
-	void Resume();
+	virtual void Pause() override;
+	virtual void Resume() override;
 
-	void ProcessInput(bool* keyboard, double mxpos, double mypos);
-	void Loop();
-	void Render();
+	virtual void ProcessInput(bool* keyboard, double mxpos, double mypos) override;
+	virtual void Loop() override;
+	virtual void Render() override;
 
 	static CDemoFrame* Instance() {
 		return &pInstance;
 	}
 
 protected:
-	CDemoFrame() {}
+	CDemoFrame() = default;
 
 private:
 	static CDemoFrame pInstance;
