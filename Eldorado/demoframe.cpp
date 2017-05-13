@@ -6,19 +6,30 @@ void CDemoFrame::Init() {
 	glEnable(GL_DEPTH_TEST);
 
 	// Load shaders
-	shader = new Shader("./shaders/shader.vert", "./shaders/shader.frag");
-	lshader = new Shader("./shaders/lamp.vert", "./shaders/lamp.frag");
+	shader = new Shader("shaders/shader.vert", "shaders/shader.frag");
+	lshader = new Shader("shaders/lamp.vert", "shaders/lamp.frag");
 
 	// Load models
-	testModel = new Model("models/human.blend");	
+	testModel = new Model("models/mar_rifle.3ds");	
 	lampModel = new Model("models/lamp.blend");
+
+	// Set up point lights
+	lights.push_back({ 
+		glm::vec3(1.2f, 1.0f, 1.5f),
+		glm::vec3(0.2f, 0.2f, 0.2f),
+		glm::vec3(0.6f, 0.6f, 0.6f),
+		glm::vec3(1.0f, 1.0f, 1.0f) });
+
+	lights.push_back({
+		glm::vec3(-2.0f, -2.0f, 0.0f),
+		glm::vec3(0.1f, 0.1f, 0.1f),
+		glm::vec3(0.4f, 0.4f, 0.4f),
+		glm::vec3(1.0f, 1.0f, 1.0f) });
 
 	// Set up rendering matrices
 	proj = glm::perspective(45.0f, 800.0f / 600.0f, 0.1f, 100.0f);
-	model = glm::rotate(model, glm::radians(-55.0f), glm::vec3(1.0f, 0.0f, 0.0f));
 	view = glm::translate(view, glm::vec3(0.0f, 0.0f, -3.0f));
-	// Translate light model matrix to the proper position and scale it down
-	lmodel = glm::translate(lmodel, lightPos) * glm::scale(lmodel, glm::vec3(0.2f));
+	glfwSwapInterval(0);
 }
 
 void CDemoFrame::Cleanup() {}
@@ -73,37 +84,43 @@ void CDemoFrame::Render() {
 	glClearColor(0.05f, 0.05f, 0.05f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-
-
 	// *** Drawing the Model *** //
 	shader->Use();
 	
 	// Set render matrices
-	shader->uMatrix4("model", glm::scale(model, glm::vec3(0.5f)));
+	shader->uMatrix4("model", glm::scale(model, glm::vec3(0.05f)));
 	shader->uMatrix4("view", view);
 	shader->uMatrix4("proj", proj);
+
+	shader->uPointLights(lights);
 	
 	// Set parameters for shader
-	shader->uVector3("lightColor", 1.0f, 1.0f, 1.0f);
-	shader->uVector3("lightPos", lightPos);
 	shader->uVector3("viewPos", cameraPos);
 	
 	// Draw the model
 	testModel->Draw(shader);
 
-
-
-	// *** Drawing the Light *** //
+	// *** Drawing the Lights *** //
 	lshader->Use();
 
-	lshader->uMatrix4("lmodel", lmodel);
 	lshader->uMatrix4("lview", view);
 	lshader->uMatrix4("lproj", proj);
 
-	// Draw the light
+	// Set model matrix to proper position for drawing
+	lmodel = glm::mat4();
+	lmodel = glm::translate(lmodel, glm::vec3(1.2f, 1.0f, 1.5f)) * glm::scale(lmodel, glm::vec3(0.2f));
+	lshader->uMatrix4("lmodel", lmodel);
+	
+	// Draw one light
 	lampModel->Draw(lshader);
 
+	// Translate to new light position
+	lmodel = glm::mat4();
+	lmodel = glm::translate(lmodel, glm::vec3(-2.0f, -2.0f, 0.0f)) * glm::scale(lmodel, glm::vec3(0.2f));
+	lshader->uMatrix4("lmodel", lmodel);
 
+	// Draw the final light
+	lampModel->Draw(lshader);
 
 	// End scene
 	glfwSwapBuffers(engine->wnd);
