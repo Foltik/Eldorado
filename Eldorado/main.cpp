@@ -9,9 +9,6 @@ int main() {
 	// Initialize Engine
 	if (!game.Init()) return K5_EXIT_FAILURE;
 
-	// Set engine pointers in each frame
-	CDemoFrame::Instance()->SetEngine(&game);
-
 	// Set Initial Frame
 	game.ChangeFrame(CDemoFrame::Instance());
 

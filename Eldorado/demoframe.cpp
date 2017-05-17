@@ -2,7 +2,9 @@
 
 CDemoFrame CDemoFrame::pInstance;
 
-void CDemoFrame::Init() {
+void CDemoFrame::Init(CEngine* e) {
+	engine = e;
+	
 	glEnable(GL_DEPTH_TEST);
 
 	// Load shaders

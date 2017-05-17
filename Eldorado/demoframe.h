@@ -8,9 +8,9 @@
 #include <SOIL/SOIL.h>
 
 
-class CDemoFrame : public CFrame{
+class CDemoFrame : public IFrame {
 public:
-	virtual void Init() override;
+	virtual void Init(CEngine* e) override;
 	virtual void Cleanup() override;
 
 	virtual void Pause() override;
