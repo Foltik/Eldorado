@@ -12,8 +12,8 @@ void CDemoFrame::Init(CEngine* e) {
 	lshader = new Shader("shaders/lamp.vert", "shaders/lamp.frag");
 
 	// Load models
-	testModel = new Model("models/mar_rifle.3ds");	
-	lampModel = new Model("models/lamp.blend");
+	testModel = new Model("models/earth.obj");	
+	lampModel = new Model("models/lamp.obj");
 
 	// Set up point lights
 	lights.push_back({ 
@@ -31,7 +31,6 @@ void CDemoFrame::Init(CEngine* e) {
 	// Set up rendering matrices
 	proj = glm::perspective(45.0f, 800.0f / 600.0f, 0.1f, 100.0f);
 	view = glm::translate(view, glm::vec3(0.0f, 0.0f, -3.0f));
-	glfwSwapInterval(0);
 }
 
 void CDemoFrame::Cleanup() {}
@@ -90,7 +89,7 @@ void CDemoFrame::Render() {
 	shader->Use();
 	
 	// Set render matrices
-	shader->uMatrix4("model", glm::scale(model, glm::vec3(0.05f)));
+	shader->uMatrix4("model", glm::scale(model, glm::vec3(0.5f)));
 	shader->uMatrix4("view", view);
 	shader->uMatrix4("proj", proj);
 
