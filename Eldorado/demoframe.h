@@ -29,7 +29,7 @@ protected:
 	CDemoFrame() = default;
 
 private:
-	static constexpr float G_CONST = .0000000000667300; // 6.67300 * 10^-11 * m^3 * kg^-1 * s^-2
+	static constexpr float G_CONST = 0.0000000000667300f; // 6.67300 * 10^-11 * m^3 * kg^-1 * s^-2
 
 	static CDemoFrame pInstance;
 

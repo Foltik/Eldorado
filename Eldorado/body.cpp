@@ -14,8 +14,8 @@ void Body::SetScale(float scl) {
 }
 
 void Body::Evolve() {
-	p.vel += p.accel;
-	p.pos += p.vel;
+	p.vel += p.accel * 1000.0f;
+	p.pos += p.vel * 1000.0f;
 }
 
 void Body::Draw(Shader* shader) {

@@ -23,7 +23,7 @@ void CDemoFrame::Init(CEngine* e) {
 
 	moon = new Body("models/moon.obj", {
 		glm::vec2(0.0f, 363300000.0f), // 3.633 * 10^8 m
-		glm::vec2(0.0f, 0.0f),
+		glm::vec2(1076.0f, 0.0f),
 		glm::vec2(0.0f, 0.0f),
 		1737000.0f, // 1.737 * 10^6
 		73476730900000000000000.0f // 7.3 * 10^22 kg
@@ -91,14 +91,10 @@ void CDemoFrame::ProcessInput(bool* keyboard, double mxpos, double mypos) {
 }
 
 void CDemoFrame::Loop() {
-	if (glm::distance(earth->p.pos, moon->p.pos) > earth->p.rad)
-		moon->p.accel = -((G_CONST * earth->p.mass) / pow(glm::distance(earth->p.pos, moon->p.pos), 2.0f)) * glm::normalize(moon->p.pos - earth->p.pos);
-	else
-		moon->p.accel = glm::vec2(0.0f);
-	
-	printf("ACCEL: %f, %f\n", moon->p.accel.x, moon->p.accel.y);
-	printf("VEL  : %f, %f\n", moon->p.vel.x, moon->p.vel.y);
+	// a = -((G * M) / r^2)
+	moon->p.accel = -((G_CONST * earth->p.mass) / pow(glm::distance(earth->p.pos, moon->p.pos), 2.0f)) * glm::normalize(moon->p.pos - earth->p.pos);
 	moon->Evolve();
+
 	// Update the view matrix with the camera position
 	view = glm::lookAt(cameraPos, cameraPos + cameraFront, cameraUp);
 }
