@@ -24,9 +24,15 @@
     <ClCompile Include="demoframe.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="body.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="demoframe.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="body.h">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>

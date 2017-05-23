@@ -156,10 +156,12 @@ xcopy "D:\usr\bin\x64\assimp.dll" "$(SolutionDir)$(Platform)\$(Configuration)\" 
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="body.cpp" />
     <ClCompile Include="demoframe.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="body.h" />
     <ClInclude Include="demoframe.h" />
   </ItemGroup>
   <ItemGroup>

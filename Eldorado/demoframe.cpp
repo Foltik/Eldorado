@@ -11,8 +11,24 @@ void CDemoFrame::Init(CEngine* e) {
 	shader = new Shader("shaders/shader.vert", "shaders/shader.frag");
 	lshader = new Shader("shaders/lamp.vert", "shaders/lamp.frag");
 
+	// Create bodies
+	earth = new Body("models/earth.obj", {
+		0.0f, 0.0f, // x, y in m/s
+		0.0f, 0.0f, // vx, vy in m/s
+		6'371'000.0f, // radius in meters
+		5'972'000'000'000'000'000'000'000.0f // 5.9 * 10^24 kg
+	});
+	earth->SetScale(0.00000015f);
+
+	moon = new Body("models/moon.obj", {
+		384400000.0f, 0.0f,
+		0.0f, 0.0f,
+		1'737'000.0f,
+		73'476'730'900'000'000'000'000.f // 7.3 * 10^22 kg
+	});
+	moon->SetScale(0.00000015f);
+
 	// Load models
-	testModel = new Model("models/earth.obj");	
 	lampModel = new Model("models/lamp.obj");
 
 	// Set up point lights
@@ -72,10 +88,7 @@ void CDemoFrame::ProcessInput(bool* keyboard, double mxpos, double mypos) {
 	cameraFront = glm::normalize(front);
 }
 
-void CDemoFrame::Loop() {
-	// Rotate the model every tick
-	model = glm::rotate(model, 0.005f, glm::vec3(1.0f, 0.3f, 0.5f));
-	
+void CDemoFrame::Loop() {	
 	// Update the view matrix with the camera position
 	view = glm::lookAt(cameraPos, cameraPos + cameraFront, cameraUp);
 }
@@ -89,7 +102,6 @@ void CDemoFrame::Render() {
 	shader->Use();
 	
 	// Set render matrices
-	shader->uMatrix4("model", glm::scale(model, glm::vec3(0.5f)));
 	shader->uMatrix4("view", view);
 	shader->uMatrix4("proj", proj);
 
@@ -99,7 +111,8 @@ void CDemoFrame::Render() {
 	shader->uVector3("viewPos", cameraPos);
 	
 	// Draw the model
-	testModel->Draw(shader);
+	earth->Draw(shader);
+	moon->Draw(shader);
 
 	// *** Drawing the Lights *** //
 	lshader->Use();

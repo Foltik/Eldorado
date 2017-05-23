@@ -7,6 +7,7 @@
 #include <glm/gtc/type_ptr.hpp>
 #include <SOIL/SOIL.h>
 
+#include "body.h"
 
 class CDemoFrame : public IFrame {
 public:
@@ -30,13 +31,6 @@ protected:
 private:
 	static CDemoFrame pInstance;
 
-	glm::mat4 lmodel;
-	std::vector<PointLight> lights;
-
-	glm::mat4 model;
-	glm::mat4 view;
-	glm::mat4 proj;
-
 	float cameraSpeed = 0.03f;
 	glm::vec3 cameraPos = glm::vec3(0.0f, 0.0f, 3.5f);
 	glm::vec3 cameraFront = glm::vec3(0.0f, 0.0f, -1.0f);
@@ -47,9 +41,16 @@ private:
 	double lastX, lastY;
 	double sensitivity = 0.020;
 	
-	Model* testModel;
-	Model* lampModel;
+	Body* earth;
+	Body* moon;
 
+	glm::mat4 view;
+	glm::mat4 proj;
+
+	glm::mat4 lmodel;
+	std::vector<PointLight> lights;
+
+	Model* lampModel;
 	Shader* shader;
 	Shader* lshader;
 };
