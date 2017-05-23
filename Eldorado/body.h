@@ -2,8 +2,9 @@
 #include <k5/k5.h>
 
 struct BodyProperties {
-	float x, y;
-	float vx, vy;
+	glm::vec2 pos;
+	glm::vec2 vel;
+	glm::vec2 accel;
 	float rad;
 	float mass;
 };
@@ -17,10 +18,11 @@ public:
 
 	void Evolve();
 	void Draw(Shader* shader);
+
+	BodyProperties p;
 private:
 	Model* model;
 	glm::mat4 transform;
 	
-	BodyProperties p;
 	float scale = 1.0f;
 };

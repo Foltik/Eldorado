@@ -14,13 +14,13 @@ void Body::SetScale(float scl) {
 }
 
 void Body::Evolve() {
-	p.x += p.vx;
-	p.y += p.vy;
+	p.vel += p.accel;
+	p.pos += p.vel;
 }
 
 void Body::Draw(Shader* shader) {
 	transform = glm::mat4();
-	transform = glm::translate(transform, glm::vec3(p.x * scale, p.y * scale, 0)) * glm::scale(transform, glm::vec3(p.rad * scale));
+	transform = glm::translate(transform, glm::vec3(p.pos.x * scale, 0, -p.pos.y * scale)) * glm::scale(transform, glm::vec3(p.rad * scale));
 	shader->uMatrix4("model", transform);
 
 	model->Draw(shader);

@@ -10,7 +10,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.500000
 d 1.000000
 illum 2
-map_Kd -s 1.000000 1.000000 1.000000 C:\Users\Jack\Downloads\h5uo4n0v569s-earth\4096_earth.jpg
-map_Bump -s 1.000000 -1.000000 1.000000 C:\\Users\\Jack\\Downloads\\h5uo4n0v569s-earth\\4096_bump.jpg
-map_Ka -s 1.000000 -1.000000 1.000000 C:\\Users\\Jack\\Downloads\\h5uo4n0v569s-earth\\4096_earth.jpg
-map_Ke -s 1.000000 -1.000000 1.000000 C:\\Users\\Jack\\Downloads\\h5uo4n0v569s-earth\\4096_night_lights.jpg
+map_Kd /home/jack/Downloads/earth/4096_earth.jpg
+map_Bump /home/jack/Downloads/earth/4096_bump.jpg
+map_Ka /home/jack/Downloads/earth/4096_earth.jpg
+map_Ke /home/jack/Downloads/earth/4096_night_lights.jpg

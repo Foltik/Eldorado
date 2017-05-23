@@ -29,9 +29,11 @@ protected:
 	CDemoFrame() = default;
 
 private:
+	static constexpr float G_CONST = .0000000000667300; // 6.67300 * 10^-11 * m^3 * kg^-1 * s^-2
+
 	static CDemoFrame pInstance;
 
-	float cameraSpeed = 0.03f;
+	float cameraSpeed = 0.05f;
 	glm::vec3 cameraPos = glm::vec3(0.0f, 0.0f, 3.5f);
 	glm::vec3 cameraFront = glm::vec3(0.0f, 0.0f, -1.0f);
 	glm::vec3 cameraUp = glm::vec3(0.0f, 1.0f, 0.0f);
