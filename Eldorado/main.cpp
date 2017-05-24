@@ -4,18 +4,15 @@
 
 
 int main() {
-	CEngine game("K5 Engine Test", 800, 600, false);
 
-	// Initialize Engine
-	if (!game.Init()) return K5_EXIT_FAILURE;
+	CEngine::Instance().CreateWindow("K5 Engine Test", 800, 600, false);
 
-	// Set Initial Frame
-	game.ChangeFrame(CDemoFrame::Instance());
+	CEngine::Instance().ChangeFrame(CDemoFrame::Instance());
 
-	while (game.Running()) 
-		game.Tick();
+	while (CEngine::Instance().Running()) 
+		CEngine::Instance().Tick();
 
-	game.Cleanup();
+	CEngine::Instance().Cleanup();
 
 	return K5_EXIT_SUCCESS;
 }

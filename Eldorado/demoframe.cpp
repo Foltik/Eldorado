@@ -19,7 +19,7 @@ void CDemoFrame::Init(CEngine* e) {
 		6371000.0f, // 6.371 * 10^6 kg
 		5972000000000000000000000.0f // 5.972 * 10^24 kg
 	});
-	earth->SetScale(0.00000015f);
+	earth->SetScale(0.000000015f);
 
 	moon = new Body("models/moon.obj", {
 		glm::vec2(0.0f, 363300000.0f), // 3.633 * 10^8 m
@@ -28,7 +28,7 @@ void CDemoFrame::Init(CEngine* e) {
 		1737000.0f, // 1.737 * 10^6
 		73476730900000000000000.0f // 7.3 * 10^22 kg
 	});
-	moon->SetScale(0.00000015f);
+	moon->SetScale(0.000000015f);
 
 	// Load models
 	lampModel = new Model("models/lamp.obj");
@@ -73,6 +73,7 @@ void CDemoFrame::ProcessInput(bool* keyboard, double mxpos, double mypos) {
 	if (keyboard[GLFW_KEY_UP] && !up_held) {
 		up_held = true;
 		simSpeed *= 2;
+		printf("Sim Speed: %f\n", simSpeed);
 	}
 	if (!keyboard[GLFW_KEY_UP] && up_held)
 		up_held = false;
@@ -80,6 +81,7 @@ void CDemoFrame::ProcessInput(bool* keyboard, double mxpos, double mypos) {
 	if (keyboard[GLFW_KEY_DOWN] && !down_held) {
 		down_held = true;
 		simSpeed /= 2;
+		printf("Sim Speed: %f\n", simSpeed);
 	}
 	if (!keyboard[GLFW_KEY_DOWN] && down_held)
 		down_held = false;
@@ -107,6 +109,8 @@ void CDemoFrame::ProcessInput(bool* keyboard, double mxpos, double mypos) {
 void CDemoFrame::Loop() {
 	// a = -((G * M) / r^2)
 	moon->p.accel = -((G_CONST * earth->p.mass) / pow(glm::distance(earth->p.pos, moon->p.pos), 2.0f)) * glm::normalize(moon->p.pos - earth->p.pos);
+	
+	printf("Moon Velocity: %.2f m/s\n", glm::length(moon->p.vel));
 	moon->Evolve(simSpeed);
 
 	// Update the view matrix with the camera position
