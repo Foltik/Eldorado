@@ -16,7 +16,7 @@ public:
 
 	void SetScale(float scl);
 
-	void Evolve();
+	void Evolve(float Timescale);
 	void Draw(Shader* shader);
 
 	BodyProperties p;

@@ -33,6 +33,8 @@ private:
 
 	static CDemoFrame pInstance;
 
+	float simSpeed = 1.0f;
+
 	float cameraSpeed = 0.05f;
 	glm::vec3 cameraPos = glm::vec3(0.0f, 0.0f, 3.5f);
 	glm::vec3 cameraFront = glm::vec3(0.0f, 0.0f, -1.0f);
@@ -42,6 +44,9 @@ private:
 	float yaw = -90.0f;
 	double lastX, lastY;
 	double sensitivity = 0.020;
+
+	bool up_held;
+	bool down_held;
 	
 	Body* earth;
 	Body* moon;

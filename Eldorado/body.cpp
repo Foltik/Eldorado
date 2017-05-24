@@ -13,9 +13,9 @@ void Body::SetScale(float scl) {
 	scale = scl;
 }
 
-void Body::Evolve() {
-	p.vel += p.accel * 1000.0f;
-	p.pos += p.vel * 1000.0f;
+void Body::Evolve(float timeScale) {
+	p.vel += p.accel * (1.0f / 60.0f) * timeScale;
+	p.pos += p.vel * (1.0f / 60.0f) * timeScale;
 }
 
 void Body::Draw(Shader* shader) {

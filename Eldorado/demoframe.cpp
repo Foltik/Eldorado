@@ -19,7 +19,7 @@ void CDemoFrame::Init(CEngine* e) {
 		6371000.0f, // 6.371 * 10^6 kg
 		5972000000000000000000000.0f // 5.972 * 10^24 kg
 	});
-	earth->SetScale(0.000000015f);
+	earth->SetScale(0.00000015f);
 
 	moon = new Body("models/moon.obj", {
 		glm::vec2(0.0f, 363300000.0f), // 3.633 * 10^8 m
@@ -28,7 +28,7 @@ void CDemoFrame::Init(CEngine* e) {
 		1737000.0f, // 1.737 * 10^6
 		73476730900000000000000.0f // 7.3 * 10^22 kg
 	});
-	moon->SetScale(0.000000015f);
+	moon->SetScale(0.00000015f);
 
 	// Load models
 	lampModel = new Model("models/lamp.obj");
@@ -47,7 +47,7 @@ void CDemoFrame::Init(CEngine* e) {
 		glm::vec3(1.0f, 1.0f, 1.0f) });
 
 	// Set up rendering matrices
-	proj = glm::perspective(45.0f, 800.0f / 600.0f, 0.1f, 100.0f);
+	proj = glm::perspective(45.0f, 800.0f / 600.0f, 0.1f, 1000.0f);
 	view = glm::translate(view, glm::vec3(0.0f, 0.0f, -3.0f));
 }
 
@@ -69,6 +69,20 @@ void CDemoFrame::ProcessInput(bool* keyboard, double mxpos, double mypos) {
 		cameraPos += glm::normalize(glm::cross(cameraFront, cameraUp)) * cameraSpeed;
 	if (keyboard[GLFW_KEY_A])
 		cameraPos -= glm::normalize(glm::cross(cameraFront, cameraUp)) * cameraSpeed;
+
+	if (keyboard[GLFW_KEY_UP] && !up_held) {
+		up_held = true;
+		simSpeed *= 2;
+	}
+	if (!keyboard[GLFW_KEY_UP] && up_held)
+		up_held = false;
+		
+	if (keyboard[GLFW_KEY_DOWN] && !down_held) {
+		down_held = true;
+		simSpeed /= 2;
+	}
+	if (!keyboard[GLFW_KEY_DOWN] && down_held)
+		down_held = false;
 
 	// Mouse X/Y -> pitch/yaw camera
 	yaw += (float)((mxpos - lastX) * sensitivity);
@@ -93,7 +107,7 @@ void CDemoFrame::ProcessInput(bool* keyboard, double mxpos, double mypos) {
 void CDemoFrame::Loop() {
 	// a = -((G * M) / r^2)
 	moon->p.accel = -((G_CONST * earth->p.mass) / pow(glm::distance(earth->p.pos, moon->p.pos), 2.0f)) * glm::normalize(moon->p.pos - earth->p.pos);
-	moon->Evolve();
+	moon->Evolve(simSpeed);
 
 	// Update the view matrix with the camera position
 	view = glm::lookAt(cameraPos, cameraPos + cameraFront, cameraUp);
