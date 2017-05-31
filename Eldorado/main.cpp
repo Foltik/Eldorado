@@ -4,15 +4,16 @@
 
 
 int main() {
+	CEngine& game = CEngine::Instance();
 
-	CEngine::Instance().CreateWindow("K5 Engine Test", 800, 600, false);
+	game.CreateWindow("K5 Engine Test", 800, 600, false);
 
-	CEngine::Instance().ChangeFrame(CDemoFrame::Instance());
+	game.ChangeFrame(CDemoFrame::Instance());
 
-	while (CEngine::Instance().Running()) 
-		CEngine::Instance().Tick();
+	while (game.Running()) 
+		game.Tick();
 
-	CEngine::Instance().Cleanup();
+	game.Cleanup();
 
 	return K5_EXIT_SUCCESS;
 }

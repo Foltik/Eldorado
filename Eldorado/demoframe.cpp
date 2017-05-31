@@ -49,6 +49,9 @@ void CDemoFrame::Init(CEngine* e) {
 	// Set up rendering matrices
 	proj = glm::perspective(45.0f, 800.0f / 600.0f, 0.1f, 1000.0f);
 	view = glm::translate(view, glm::vec3(0.0f, 0.0f, -3.0f));
+
+	text = new TextRenderer();
+	text->LoadFont("fonts/arial.ttf", 48);
 }
 
 void CDemoFrame::Cleanup() {}
@@ -123,6 +126,8 @@ void CDemoFrame::Render() {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	// *** Drawing the Model *** //
+
+
 	shader->Use();
 	
 	// Set render matrices
@@ -159,6 +164,8 @@ void CDemoFrame::Render() {
 
 	// Draw the final light
 	lampModel->Draw(lshader);
+
+	text->DrawText("Test", 25.0f, 25.0f, 1.0f, glm::vec3(1.0f, 1.0f, 1.0f), "fonts/arial.ttf");
 
 	// End scene
 	glfwSwapBuffers(engine->wnd);

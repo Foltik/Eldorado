@@ -60,4 +60,6 @@ private:
 	Model* lampModel;
 	Shader* shader;
 	Shader* lshader;
+
+	TextRenderer* text;
 };

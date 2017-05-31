@@ -49,5 +49,11 @@
     <None Include="shaders\lamp.frag">
       <Filter>Resource Files\Shaders</Filter>
     </None>
+    <None Include="shaders\text.vert">
+      <Filter>Resource Files\Shaders</Filter>
+    </None>
+    <None Include="shaders\text.frag">
+      <Filter>Resource Files\Shaders</Filter>
+    </None>
   </ItemGroup>
 </Project>

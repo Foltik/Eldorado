@@ -75,7 +75,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>D:\usr\include;$(IncludePath)</IncludePath>
+    <IncludePath>D:\usr\include\freetype2;D:\usr\include;$(IncludePath)</IncludePath>
     <LibraryPath>D:\usr\lib\x64;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -110,13 +110,14 @@
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
-      <AdditionalDependencies>k5.lib;opengl32.lib;glew32s.lib;glfw3.lib;SOIL.lib;assimp.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>k5.lib;opengl32.lib;glew32s.lib;glfw3.lib;SOIL.lib;assimp.lib;freetyped.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalOptions>/ignore:4049 %(AdditionalOptions)</AdditionalOptions>
     </Link>
     <PostBuildEvent>
       <Command>xcopy "$(SolutionDir)$(ProjectName)\shaders" "$(SolutionDir)$(Platform)\$(Configuration)\shaders" /e /i /y
 xcopy "$(SolutionDir)$(ProjectName)\textures" "$(SolutionDir)$(Platform)\$(Configuration)\textures" /e /i /y
 xcopy "$(SolutionDir)$(ProjectName)\models" "$(SolutionDir)$(Platform)\$(Configuration)\models" /e /i /y
+xcopy "$(SolutionDir)$(ProjectName)\fonts" "$(SolutionDir)$(Platform)\$(Configuration)\fonts" /e /i /y
 
 xcopy "D:\usr\bin\x64\assimp.dll" "$(SolutionDir)$(Platform)\$(Configuration)\" /e /i /y</Command>
     </PostBuildEvent>
@@ -169,6 +170,8 @@ xcopy "D:\usr\bin\x64\assimp.dll" "$(SolutionDir)$(Platform)\$(Configuration)\" 
     <None Include="shaders\lamp.vert" />
     <None Include="shaders\shader.frag" />
     <None Include="shaders\shader.vert" />
+    <None Include="shaders\text.frag" />
+    <None Include="shaders\text.vert" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
