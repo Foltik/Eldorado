@@ -6,6 +6,9 @@ void CDemoFrame::Init(CEngine* e) {
 	engine = e;
 	
 	glEnable(GL_DEPTH_TEST);
+	glEnable(GL_CULL_FACE);
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 	// Load shaders
 	shader = new Shader("shaders/shader.vert", "shaders/shader.frag");
@@ -13,19 +16,19 @@ void CDemoFrame::Init(CEngine* e) {
 
 	// Create bodies
 	earth = new Body("models/earth.obj", {
-		glm::vec2(0.0f, 0.0f), // x, y in m/s
-		glm::vec2(0.0f, 0.0f), // vx, vy in m/s
-		glm::vec2(0.0f, 0.0f), // ax, ay in m/s
-		6371000.0f, // 6.371 * 10^6 kg
+		glm::vec2(0.0f, 0.0f),
+		glm::vec2(0.0f, 0.0f),
+		glm::vec2(0.0f, 0.0f),
+		6371000.0f, // 6.371 * 10^6 m
 		5972000000000000000000000.0f // 5.972 * 10^24 kg
 	});
 	earth->SetScale(0.000000015f);
 
 	moon = new Body("models/moon.obj", {
 		glm::vec2(0.0f, 363300000.0f), // 3.633 * 10^8 m
-		glm::vec2(1076.0f, 0.0f),
+		glm::vec2(1076.0f, 0.0f), // 1.076 * 10^3 m/s
 		glm::vec2(0.0f, 0.0f),
-		1737000.0f, // 1.737 * 10^6
+		1737000.0f, // 1.737 * 10^6 m
 		73476730900000000000000.0f // 7.3 * 10^22 kg
 	});
 	moon->SetScale(0.000000015f);
@@ -112,8 +115,7 @@ void CDemoFrame::ProcessInput(bool* keyboard, double mxpos, double mypos) {
 void CDemoFrame::Loop() {
 	// a = -((G * M) / r^2)
 	moon->p.accel = -((G_CONST * earth->p.mass) / pow(glm::distance(earth->p.pos, moon->p.pos), 2.0f)) * glm::normalize(moon->p.pos - earth->p.pos);
-	
-	printf("Moon Velocity: %.2f m/s\n", glm::length(moon->p.vel));
+
 	moon->Evolve(simSpeed);
 
 	// Update the view matrix with the camera position
@@ -124,48 +126,19 @@ void CDemoFrame::Render() {
 	// Clear the color and depth buffer
 	glClearColor(0.05f, 0.05f, 0.05f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-	// *** Drawing the Model *** //
-
-
-	shader->Use();
 	
 	// Set render matrices
+	shader->Use();
 	shader->uMatrix4("view", view);
 	shader->uMatrix4("proj", proj);
-
-	shader->uPointLights(lights);
-	
-	// Set parameters for shader
 	shader->uVector3("viewPos", cameraPos);
+	shader->uPointLights(lights);
 	
 	// Draw the model
 	earth->Draw(shader);
 	moon->Draw(shader);
 
-	// *** Drawing the Lights *** //
-	lshader->Use();
-
-	lshader->uMatrix4("lview", view);
-	lshader->uMatrix4("lproj", proj);
-
-	// Set model matrix to proper position for drawing
-	lmodel = glm::mat4();
-	lmodel = glm::translate(lmodel, glm::vec3(1.2f, 1.0f, 1.5f)) * glm::scale(lmodel, glm::vec3(0.2f));
-	lshader->uMatrix4("lmodel", lmodel);
-	
-	// Draw one light
-	lampModel->Draw(lshader);
-
-	// Translate to new light position
-	lmodel = glm::mat4();
-	lmodel = glm::translate(lmodel, glm::vec3(-2.0f, -2.0f, 0.0f)) * glm::scale(lmodel, glm::vec3(0.2f));
-	lshader->uMatrix4("lmodel", lmodel);
-
-	// Draw the final light
-	lampModel->Draw(lshader);
-
-	text->DrawText("Test", 25.0f, 25.0f, 1.0f, glm::vec3(1.0f, 1.0f, 1.0f), "fonts/arial.ttf");
+	text->DrawText("Test String.", 25.0f, 25.0f, 0.4f, glm::vec3(0.4f, 0.8f, 0.0f), "fonts/arial.ttf");
 
 	// End scene
 	glfwSwapBuffers(engine->wnd);
