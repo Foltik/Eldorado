@@ -158,20 +158,18 @@ xcopy "D:\usr\bin\x64\assimp.dll" "$(SolutionDir)$(Platform)\$(Configuration)\" 
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="body.cpp" />
-    <ClCompile Include="demoframe.cpp" />
+    <ClCompile Include="earthframe.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="body.h" />
-    <ClInclude Include="demoframe.h" />
+    <ClInclude Include="earthframe.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="shaders\lamp.frag" />
     <None Include="shaders\lamp.vert" />
     <None Include="shaders\shader.frag" />
     <None Include="shaders\shader.vert" />
-    <None Include="shaders\text.frag" />
-    <None Include="shaders\text.vert" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -9,7 +9,7 @@
 
 #include "body.h"
 
-class CDemoFrame : public IFrame {
+class EarthFrame : public IFrame {
 public:
 	virtual void Init(CEngine* e) override;
 	virtual void Cleanup() override;
@@ -21,17 +21,22 @@ public:
 	virtual void Loop() override;
 	virtual void Render() override;
 
-	static CDemoFrame* Instance() {
-		return &pInstance;
+	static EarthFrame& Instance() {
+		static EarthFrame instance;
+		return instance;
 	}
 
 protected:
-	CDemoFrame() = default;
+	EarthFrame() = default;
+	EarthFrame(const EarthFrame&) = delete;
+	EarthFrame(EarthFrame&&) = delete;
+	void operator=(const EarthFrame&) = delete;
+	void operator=(EarthFrame&&) = delete;
 
 private:
 	static constexpr float G_CONST = 0.0000000000667300f; // 6.67300 * 10^-11 * m^3 * kg^-1 * s^-2
 
-	static CDemoFrame pInstance;
+	static EarthFrame pInstance;
 
 	float simSpeed = 1.0f;
 

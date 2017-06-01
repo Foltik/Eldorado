@@ -1,8 +1,6 @@
-#include "demoframe.h"
+#include "earthframe.h"
 
-CDemoFrame CDemoFrame::pInstance;
-
-void CDemoFrame::Init(CEngine* e) {
+void EarthFrame::Init(CEngine* e) {
 	engine = e;
 	
 	glEnable(GL_DEPTH_TEST);
@@ -57,11 +55,11 @@ void CDemoFrame::Init(CEngine* e) {
 	text->LoadFont("fonts/arial.ttf", 48);
 }
 
-void CDemoFrame::Cleanup() {}
-void CDemoFrame::Pause() {}
-void CDemoFrame::Resume() {}
+void EarthFrame::Cleanup() {}
+void EarthFrame::Pause() {}
+void EarthFrame::Resume() {}
 
-void CDemoFrame::ProcessInput(bool* keyboard, double mxpos, double mypos) {
+void EarthFrame::ProcessInput(bool* keyboard, double mxpos, double mypos) {
 	// [ESC] -> Quit
 	if (keyboard[GLFW_KEY_ESCAPE])
 		engine->Quit();
@@ -112,7 +110,7 @@ void CDemoFrame::ProcessInput(bool* keyboard, double mxpos, double mypos) {
 	cameraFront = glm::normalize(front);
 }
 
-void CDemoFrame::Loop() {
+void EarthFrame::Loop() {
 	// a = -((G * M) / r^2)
 	moon->p.accel = -((G_CONST * earth->p.mass) / pow(glm::distance(earth->p.pos, moon->p.pos), 2.0f)) * glm::normalize(moon->p.pos - earth->p.pos);
 
@@ -122,7 +120,7 @@ void CDemoFrame::Loop() {
 	view = glm::lookAt(cameraPos, cameraPos + cameraFront, cameraUp);
 }
 
-void CDemoFrame::Render() {
+void EarthFrame::Render() {
 	// Clear the color and depth buffer
 	glClearColor(0.05f, 0.05f, 0.05f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);

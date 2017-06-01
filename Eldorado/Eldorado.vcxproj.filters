@@ -21,18 +21,18 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="demoframe.cpp">
+    <ClCompile Include="body.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="body.cpp">
+    <ClCompile Include="earthframe.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="demoframe.h">
+    <ClInclude Include="body.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="body.h">
+    <ClInclude Include="earthframe.h">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -47,12 +47,6 @@
       <Filter>Resource Files\Shaders</Filter>
     </None>
     <None Include="shaders\lamp.frag">
-      <Filter>Resource Files\Shaders</Filter>
-    </None>
-    <None Include="shaders\text.vert">
-      <Filter>Resource Files\Shaders</Filter>
-    </None>
-    <None Include="shaders\text.frag">
       <Filter>Resource Files\Shaders</Filter>
     </None>
   </ItemGroup>
