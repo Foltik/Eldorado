@@ -27,12 +27,18 @@
     <ClCompile Include="earthframe.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="menuframe.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="body.h">
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="earthframe.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="menuframe.h">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -47,6 +53,12 @@
       <Filter>Resource Files\Shaders</Filter>
     </None>
     <None Include="shaders\lamp.frag">
+      <Filter>Resource Files\Shaders</Filter>
+    </None>
+    <None Include="shaders\menu.vert">
+      <Filter>Resource Files\Shaders</Filter>
+    </None>
+    <None Include="shaders\menu.frag">
       <Filter>Resource Files\Shaders</Filter>
     </None>
   </ItemGroup>

@@ -160,14 +160,18 @@ xcopy "D:\usr\bin\x64\assimp.dll" "$(SolutionDir)$(Platform)\$(Configuration)\" 
     <ClCompile Include="body.cpp" />
     <ClCompile Include="earthframe.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="menuframe.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="body.h" />
     <ClInclude Include="earthframe.h" />
+    <ClInclude Include="menuframe.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="shaders\lamp.frag" />
     <None Include="shaders\lamp.vert" />
+    <None Include="shaders\menu.frag" />
+    <None Include="shaders\menu.vert" />
     <None Include="shaders\shader.frag" />
     <None Include="shaders\shader.vert" />
   </ItemGroup>
