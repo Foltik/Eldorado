@@ -1,8 +1,8 @@
 CC = clang++
 
-LIBFLAGS = -lGL -lGLEW -lglfw -l:k5.a -lSOIL -lassimp
-FLAGS = -Wall -std=c++11
-DBGFLAGS = -Wall -ggdb3 -std=c++11
+LIBFLAGS = -lGL -lGLEW -lglfw -l:k5.a -lSOIL -lassimp -lfreetype
+FLAGS = -Wall -std=c++11 -I/usr/include/freetype2
+DBGFLAGS = -Wall -ggdb3 -std=c++11 -I/usr/include/freetype2
 
 BUILDDIR = build
 
