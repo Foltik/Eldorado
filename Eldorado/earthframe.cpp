@@ -2,7 +2,9 @@
 
 void EarthFrame::Init(CEngine* e) {
 	engine = e;
-	
+
+	glfwSetInputMode(engine->wnd, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_CULL_FACE);
 	glEnable(GL_BLEND);
@@ -59,10 +61,12 @@ void EarthFrame::Cleanup() {}
 void EarthFrame::Pause() {}
 void EarthFrame::Resume() {}
 
-void EarthFrame::ProcessInput(bool* keyboard, double mxpos, double mypos) {
+void EarthFrame::ProcessInput(bool* keyboard, bool* mouse, double mxpos, double mypos) {
 	// [ESC] -> Quit
-	if (keyboard[GLFW_KEY_ESCAPE])
-		engine->Quit();
+	if (keyboard[GLFW_KEY_ESCAPE]) {
+		engine->PopFrame();
+		return;
+	}
 
 	// [W][A][S][D] -> Strafe camera
 	if (keyboard[GLFW_KEY_W])

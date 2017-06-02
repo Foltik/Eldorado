@@ -1,9 +1,11 @@
 #pragma once
 #include <k5/k5.h>
 
+#include "earthframe.h"
+
 struct Point {
-	int x;
-	int y;
+	float x;
+	float y;
 };
 
 struct Rect {
@@ -22,7 +24,7 @@ public:
 	virtual void Pause() override;
 	virtual void Resume() override;
 
-	virtual void ProcessInput(bool* keyboard, double mxpos, double mypos) override;
+	virtual void ProcessInput(bool* keyboard, bool* mouse, double mxpos, double mypos) override;
 	virtual void Loop() override;
 	virtual void Render() override;
 
@@ -39,7 +41,7 @@ protected:
 	void operator=(MenuFrame&&) = delete;
 
 private:
-	bool inRect(Rect r, double mxpos, double mypos);
+	bool inRect(const Rect& r, double mxpos, double mypos);
 
 	int menuState = 0;
 

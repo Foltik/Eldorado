@@ -7,6 +7,8 @@
 #include <glm/gtc/type_ptr.hpp>
 #include <SOIL/SOIL.h>
 
+#include "menuframe.h"
+
 #include "body.h"
 
 class EarthFrame : public IFrame {
@@ -17,7 +19,7 @@ public:
 	virtual void Pause() override;
 	virtual void Resume() override;
 
-	virtual void ProcessInput(bool* keyboard, double mxpos, double mypos) override;
+	virtual void ProcessInput(bool* keyboard, bool* mouse, double mxpos, double mypos) override;
 	virtual void Loop() override;
 	virtual void Render() override;
 

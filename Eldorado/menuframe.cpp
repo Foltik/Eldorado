@@ -44,28 +44,44 @@ void MenuFrame::Init(CEngine* e) {
 void MenuFrame::Cleanup() {
 	delete shader;
 }
+
 void MenuFrame::Pause() {}
-void MenuFrame::Resume() {}
+void MenuFrame::Resume() {
+	glfwSetInputMode(engine->wnd, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
+}
 
 void MenuFrame::Loop() {}
 
-void MenuFrame::ProcessInput(bool* keyboard, double mxpos, double mypos) {
+void MenuFrame::ProcessInput(bool* keyboard, bool* mouse, double mxpos, double mypos) {
 	Rect button1 = {
-		{ 303, 287 },
-		{ 329, 243 },
-		{ 543, 243 },
-		{ 517, 287 }
+		{ 305.0f, 312.0f },
+		{ 330.0f, 355.0f },
+		{ 543.0f, 355.0f },
+		{ 517.0f, 312.0f }
 	};
 
 	Rect button2 = {
-		{ 303, 353 },
-		{ 329, 309 },
-		{ 542, 309 },
-		{ 517, 353 }
+		{ 305.0f, 246.0f },
+		{ 330.0f, 289.0f },
+		{ 543.0f, 289.0f },
+		{ 517.0f, 246.0f }
 	};
+
+	if (inRect(button1, mxpos, mypos))
+		menuState = 1;
+	else if (inRect(button2, mxpos, mypos))
+		menuState = 2;
+	else
+		menuState = 0;
+
+	if (menuState == 1 && mouse[GLFW_MOUSE_BUTTON_1])
+		engine->PushFrame(&EarthFrame::Instance());
 }
 
 void MenuFrame::Render() {
+	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
 	shader->Use();
 	glActiveTexture(GL_TEXTURE0);
 	shader->uInt("tex", 0);
@@ -77,6 +93,18 @@ void MenuFrame::Render() {
 	glfwSwapBuffers(engine->wnd);
 }
 
-bool MenuFrame::inRect(Rect r, double mxpos, double mypos) {
+bool MenuFrame::inRect(const Rect& r, double mxpos, double mypos) {
+	float mx = (float)mxpos;
+	float my = CEngine::wndH - (float)mypos;
+	
+	float ml = (r.tl.y - r.bl.y) / (r.tl.x - r.bl.x);
+	float mr = (r.tr.y - r.br.y) / (r.tr.x - r.br.x);
 
+	float il = r.tl.y - (ml * r.tl.x);
+	float ir = r.tr.y - (mr * r.tr.x);
+	
+	return (mx >= ((my - il) / ml) &&
+		   	mx <= ((my - ir) / mr) &&
+			my >= r.bl.y &&
+			my <= r.tl.y);
 }
