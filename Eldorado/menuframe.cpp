@@ -48,7 +48,7 @@ void MenuFrame::Init(CEngine* e) {
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 	text = new TextRenderer();
-	text->LoadFont("fonts/meslo.ttf", 48);
+	text->LoadFont("fonts/Meslo.ttf", 48);
 }
 
 void MenuFrame::Cleanup() {
@@ -119,8 +119,8 @@ void MenuFrame::Render() {
 	glBindVertexArray(0);
 
 	if (showInfo) {
-		text->DrawText("Hold  [ i ] » Controls", 305.0f, 220.0f, 0.35f, glm::vec3(1.0f, 1.0f, 1.0f), "fonts/meslo.ttf");
-		text->DrawText("Press [Esc] » Quit", 305.0f, 190.0f, 0.35f, glm::vec3(1.0f, 1.0f, 1.0f), "fonts/meslo.ttf");
+		text->DrawText("Hold  [ i ] » Controls", 305.0f, 220.0f, 0.35f, glm::vec3(1.0f, 1.0f, 1.0f), "fonts/Meslo.ttf");
+		text->DrawText("Press [Esc] » Quit", 305.0f, 190.0f, 0.35f, glm::vec3(1.0f, 1.0f, 1.0f), "fonts/Meslo.ttf");
 	}
 
 	glfwSwapBuffers(engine->wnd);

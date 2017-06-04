@@ -38,6 +38,8 @@ resource:
 	cp -r Eldorado/textures $(BUILDDIR)/linux/debug
 	cp -r Eldorado/models $(BUILDDIR)/linux/release
 	cp -r Eldorado/models $(BUILDDIR)/linux/debug
+	cp -r Eldorado/fonts $(BUILDDIR)/linux/release
+	cp -r Eldorado/fonts $(BUILDDIR)/linux/debug
 
 clean:
 	rm -rf build

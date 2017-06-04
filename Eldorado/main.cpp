@@ -16,8 +16,8 @@ int main() {
 
 		game.Cleanup();
 	}
-	catch (std::runtime_error e) {
-		printf(e.what());
+	catch (std::exception* e) {
+		printf("%s", e->what());
 		return K5_EXIT_FAILURE;
 	}
 
