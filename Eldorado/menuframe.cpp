@@ -39,6 +39,16 @@ void MenuFrame::Init(CEngine* e) {
 
 	glEnableVertexAttribArray(1);
 	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(GLfloat), (GLvoid*)(2 * sizeof(GLfloat)));
+
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	
+	glBindVertexArray(0);
+
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+	text = new TextRenderer();
+	text->LoadFont("fonts/meslo.ttf", 48);
 }
 
 void MenuFrame::Cleanup() {
@@ -53,6 +63,9 @@ void MenuFrame::Resume() {
 void MenuFrame::Loop() {}
 
 void MenuFrame::ProcessInput(bool* keyboard, bool* mouse, double mxpos, double mypos) {
+	if (keyboard[GLFW_KEY_ESCAPE])
+		engine->Quit();
+
 	Rect button1 = {
 		{ 305.0f, 312.0f },
 		{ 330.0f, 355.0f },
@@ -67,15 +80,29 @@ void MenuFrame::ProcessInput(bool* keyboard, bool* mouse, double mxpos, double m
 		{ 517.0f, 246.0f }
 	};
 
-	if (inRect(button1, mxpos, mypos))
+	auto inRect = [](Rect r, float mx, float my) {
+		// Determines if the point (mx, my) is inside the Rect r
+		my = CEngine::wndH - my;
+		return (
+			mx >= (my - (r.tl.y - (((r.tl.y - r.bl.y) / (r.tl.x - r.bl.x)) * r.tl.x))) / ((r.tl.y - r.bl.y) / (r.tl.x - r.bl.x)) &&
+			mx <= (my - (r.tr.y - (((r.tr.y - r.br.y) / (r.tr.x - r.br.x)) * r.tr.x))) / ((r.tr.y - r.br.y) / (r.tr.x - r.br.x)) &&
+			my >= r.bl.y &&
+			my <= r.tl.y
+			);
+	};
+
+	if (inRect(button1, (float)mxpos, (float)mypos))
 		menuState = 1;
-	else if (inRect(button2, mxpos, mypos))
+	else if (inRect(button2, (float)mxpos, (float)mypos))
 		menuState = 2;
 	else
 		menuState = 0;
 
 	if (menuState == 1 && mouse[GLFW_MOUSE_BUTTON_1])
-		engine->PushFrame(&EarthFrame::Instance());
+		engine->ChangeFrame(&EarthFrame::Instance());
+
+	if (menuState == 2 && mouse[GLFW_MOUSE_BUTTON_1])
+		showInfo = true;
 }
 
 void MenuFrame::Render() {
@@ -89,22 +116,12 @@ void MenuFrame::Render() {
 
 	glBindVertexArray(vao);
 	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+	glBindVertexArray(0);
+
+	if (showInfo) {
+		text->DrawText("Hold  [ i ] » Controls", 305.0f, 220.0f, 0.35f, glm::vec3(1.0f, 1.0f, 1.0f), "fonts/meslo.ttf");
+		text->DrawText("Press [Esc] » Quit", 305.0f, 190.0f, 0.35f, glm::vec3(1.0f, 1.0f, 1.0f), "fonts/meslo.ttf");
+	}
 
 	glfwSwapBuffers(engine->wnd);
-}
-
-bool MenuFrame::inRect(const Rect& r, double mxpos, double mypos) {
-	float mx = (float)mxpos;
-	float my = CEngine::wndH - (float)mypos;
-	
-	float ml = (r.tl.y - r.bl.y) / (r.tl.x - r.bl.x);
-	float mr = (r.tr.y - r.br.y) / (r.tr.x - r.br.x);
-
-	float il = r.tl.y - (ml * r.tl.x);
-	float ir = r.tr.y - (mr * r.tr.x);
-	
-	return (mx >= ((my - il) / ml) &&
-		   	mx <= ((my - ir) / mr) &&
-			my >= r.bl.y &&
-			my <= r.tl.y);
 }

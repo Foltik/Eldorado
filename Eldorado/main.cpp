@@ -1,18 +1,25 @@
 #include <k5/k5.h>
+#include <exception>
 
 #include "menuframe.h"
 
 int main() {
-	CEngine& game = CEngine::Instance();
+	try {
+		CEngine& game = CEngine::Instance();
 
-	game.CreateWindow("K5 Engine Test", 800, 600, false);
-	
-	//game.ChangeFrame(&MenuFrame::Instance());
+		game.CreateWindow("K5 Engine Test", 800, 600, false);
 
-	while (game.Running()) 
-		game.Tick();
+		game.ChangeFrame(&MenuFrame::Instance());
 
-	game.Cleanup();
+		while (game.Running())
+			game.Tick();
+
+		game.Cleanup();
+	}
+	catch (std::runtime_error e) {
+		printf(e.what());
+		return K5_EXIT_FAILURE;
+	}
 
 	return K5_EXIT_SUCCESS;
 }

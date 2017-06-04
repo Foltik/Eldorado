@@ -41,10 +41,9 @@ protected:
 	void operator=(MenuFrame&&) = delete;
 
 private:
-	bool inRect(const Rect& r, double mxpos, double mypos);
-
 	int menuState = 0;
 
+	bool showInfo;
 	Texture* menuTextures;
 
 	GLuint vao;
@@ -52,6 +51,8 @@ private:
 	GLuint ebo;
 
 	Shader* shader;
+
+	TextRenderer* text;
 
 	CEngine* engine;
 };

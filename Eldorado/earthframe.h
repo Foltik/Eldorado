@@ -23,6 +23,8 @@ public:
 	virtual void Loop() override;
 	virtual void Render() override;
 
+	void Reset();
+
 	static EarthFrame& Instance() {
 		static EarthFrame instance;
 		return instance;
@@ -43,17 +45,23 @@ private:
 	float simSpeed = 1.0f;
 
 	float cameraSpeed = 0.05f;
-	glm::vec3 cameraPos = glm::vec3(0.0f, 0.0f, 3.5f);
+	glm::vec3 cameraPos = glm::vec3(-0.1f, 0.0f, -14.8f);
 	glm::vec3 cameraFront = glm::vec3(0.0f, 0.0f, -1.0f);
 	glm::vec3 cameraUp = glm::vec3(0.0f, 1.0f, 0.0f);
 
+	float fov = 45.0f;
 	float pitch = 0.0f;
-	float yaw = -90.0f;
+	float yaw = -280.0f;
 	double lastX, lastY;
 	double sensitivity = 0.020;
 
 	bool up_held;
 	bool down_held;
+	bool right_held;
+	bool left_held;
+	bool r_held;
+
+	bool drawControls;
 	
 	Body* earth;
 	Body* moon;
