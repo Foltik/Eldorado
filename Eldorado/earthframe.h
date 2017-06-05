@@ -76,5 +76,5 @@ private:
 	Shader* shader;
 	Shader* lshader;
 
-	TextRenderer* text;
+	TextRenderer& text = TextRenderer::Instance();
 };

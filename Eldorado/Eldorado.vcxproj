@@ -120,9 +120,7 @@
       <Command>xcopy "$(SolutionDir)$(ProjectName)\shaders" "$(SolutionDir)$(Platform)\$(Configuration)\shaders" /e /i /y
 xcopy "$(SolutionDir)$(ProjectName)\textures" "$(SolutionDir)$(Platform)\$(Configuration)\textures" /e /i /y
 xcopy "$(SolutionDir)$(ProjectName)\models" "$(SolutionDir)$(Platform)\$(Configuration)\models" /e /i /y
-xcopy "$(SolutionDir)$(ProjectName)\fonts" "$(SolutionDir)$(Platform)\$(Configuration)\fonts" /e /i /y
-
-xcopy "D:\usr\bin\x64\assimp.dll" "$(SolutionDir)$(Platform)\$(Configuration)\" /e /i /y</Command>
+xcopy "$(SolutionDir)$(ProjectName)\fonts" "$(SolutionDir)$(Platform)\$(Configuration)\fonts" /e /i /y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -164,9 +162,7 @@ xcopy "D:\usr\bin\x64\assimp.dll" "$(SolutionDir)$(Platform)\$(Configuration)\" 
       <Command>xcopy "$(SolutionDir)$(ProjectName)\shaders" "$(SolutionDir)$(Platform)\$(Configuration)\shaders" /e /i /y
 xcopy "$(SolutionDir)$(ProjectName)\textures" "$(SolutionDir)$(Platform)\$(Configuration)\textures" /e /i /y
 xcopy "$(SolutionDir)$(ProjectName)\models" "$(SolutionDir)$(Platform)\$(Configuration)\models" /e /i /y
-xcopy "$(SolutionDir)$(ProjectName)\fonts" "$(SolutionDir)$(Platform)\$(Configuration)\fonts" /e /i /y
-
-xcopy "D:\usr\bin\x64\assimp.dll" "$(SolutionDir)$(Platform)\$(Configuration)\" /e /i /y</Command>
+xcopy "$(SolutionDir)$(ProjectName)\fonts" "$(SolutionDir)$(Platform)\$(Configuration)\fonts" /e /i /y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>

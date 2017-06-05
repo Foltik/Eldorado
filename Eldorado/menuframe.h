@@ -52,7 +52,7 @@ private:
 
 	Shader* shader;
 
-	TextRenderer* text;
+	TextRenderer& text = TextRenderer::Instance();
 
 	CEngine* engine;
 };
