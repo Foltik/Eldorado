@@ -1,2 +1,2 @@
-# K5
-My first attempt at a game engine.
+# Eldorado
+Game created with K5 Engine.
