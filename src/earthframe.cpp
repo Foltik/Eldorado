@@ -168,30 +168,30 @@ void EarthFrame::Render() {
 	moon->Draw(shader);
 
 	if (drawControls) {
-		text->DrawText("[  Up/Down   ]  »  Zoom In/Out", 100.0f, 80.0f, 0.4f, glm::vec3(1.0f), "fonts/Meslo.ttf");
-		text->DrawText("[ Left/Right ]  »  Decrease/Increase Sim Speed", 100.0f, 110.0f, 0.4f, glm::vec3(1.0f), "fonts/Meslo.ttf");
-		text->DrawText("     [ R ]      »  Reset Simulation", 100.0f, 140.0f, 0.4f, glm::vec3(1.0f), "fonts/Meslo.ttf");
+		text->DrawText("[  Up/Down   ]  >>  Zoom In/Out", 100.0f, 80.0f, 0.4f, glm::vec3(1.0f), "Meslo.ttf");
+		text->DrawText("[ Left/Right ]  >>  Decrease/Increase Sim Speed", 100.0f, 110.0f, 0.4f, glm::vec3(1.0f), "Meslo.ttf");
+		text->DrawText("     [ R ]      >>  Reset Simulation", 100.0f, 140.0f, 0.4f, glm::vec3(1.0f), "Meslo.ttf");
 	}
 
 	char cameraInfo[256];
 	snprintf(cameraInfo, sizeof(cameraInfo), 
-		"View Position: (%.1f, %.1f, %.1f) | View Angle: (%.2f, %.2f) | FoV: %.2f°", 
+		"View Position: (%.1f, %.1f, %.1f) | View Angle: (%.2f, %.2f) | FoV: %.2f deg",
 		cameraPos.x, cameraPos.y, cameraPos.z,
 		pitch, yaw,
 		fov);
-	text->DrawText(std::string(cameraInfo), 10.0f, 10.0f, 0.3f, glm::vec3(0.0f, 1.0f, 0.0f), "fonts/Meslo.ttf");
+	text->DrawText(std::string(cameraInfo), 10.0f, 10.0f, 0.3f, glm::vec3(0.0f, 1.0f, 0.0f), "Meslo.ttf");
 
 	char simInfo[256];
 	snprintf(simInfo, sizeof(simInfo),
 		"Simulation Scale: [4.0E-8] | Simulation Speed: [%-8.1f]x", simSpeed);
-	text->DrawText(std::string(simInfo) + (simSpeed == 1.0f ? " (Real Time)" : ""), 10.0f, 30.0f, 0.3f, glm::vec3(0.0f, 1.0f, 0.0f), "fonts/Meslo.ttf");
+	text->DrawText(std::string(simInfo) + (simSpeed == 1.0f ? " (Real Time)" : ""), 10.0f, 30.0f, 0.3f, glm::vec3(0.0f, 1.0f, 0.0f), "Meslo.ttf");
 
 	char moonInfo[256];
 	snprintf(moonInfo, sizeof(moonInfo),
 		"Orbital Velocity: %-6.2f m/s | Orbital Distance: %.3fE+8 m",
 		glm::length(moon->p.vel),
 		glm::distance(earth->p.pos, moon->p.pos) / (float)100000000);
-	text->DrawText(std::string(moonInfo), 10.0f, 50.0f, 0.3f, glm::vec3(0.0f, 1.0f, 0.0f), "fonts/Meslo.ttf");
+	text->DrawText(std::string(moonInfo), 10.0f, 50.0f, 0.3f, glm::vec3(0.0f, 1.0f, 0.0f), "Meslo.ttf");
 
 	// End scene
 	glfwSwapBuffers(engine->wnd);

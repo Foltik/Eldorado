@@ -1,11 +1,12 @@
 #include <k5/k5.h>
-#include <exception>
 
 #include "menuframe.h"
 
-int main() {
+int main(int argc, char* argv[]) {
 	try {
 		CEngine& game = CEngine::Instance();
+
+        game.SetCwd(argv[0]);
 
 		game.CreateWindow("K5 Engine Test", 800, 600, false);
 
@@ -18,8 +19,8 @@ int main() {
 	}
 	catch (std::exception* e) {
 		printf("%s", e->what());
-		return K5_EXIT_FAILURE;
+		return 1;
 	}
 
-	return K5_EXIT_SUCCESS;
+	return 0;
 }

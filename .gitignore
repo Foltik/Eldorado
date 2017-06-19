@@ -8,6 +8,10 @@
 *.sln.docstates
 dna.txt
 
+# CLion
+cmake-build-release/
+cmake-build-debug/
+
 # Vim
 *.swp
 

@@ -119,8 +119,8 @@ void MenuFrame::Render() {
 	glBindVertexArray(0);
 
 	if (showInfo) {
-		text->DrawText("Hold  [ i ] » Controls", 305.0f, 220.0f, 0.35f, glm::vec3(1.0f, 1.0f, 1.0f), "fonts/Meslo.ttf");
-		text->DrawText("Press [Esc] » Quit", 305.0f, 190.0f, 0.35f, glm::vec3(1.0f, 1.0f, 1.0f), "fonts/Meslo.ttf");
+		text->DrawText("Hold  [ i ] >> Controls", 305.0f, 220.0f, 0.35f, glm::vec3(1.0f, 1.0f, 1.0f), "Meslo.ttf");
+		text->DrawText("Press [Esc] >> Quit", 305.0f, 190.0f, 0.35f, glm::vec3(1.0f, 1.0f, 1.0f), "Meslo.ttf");
 	}
 
 	glfwSwapBuffers(engine->wnd);
