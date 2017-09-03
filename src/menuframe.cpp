@@ -57,7 +57,7 @@ void MenuFrame::Cleanup() {
 
 void MenuFrame::Pause() {}
 void MenuFrame::Resume() {
-	glfwSetInputMode(engine->wnd, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
+	engine->enableCursor();
 }
 
 void MenuFrame::Loop() {}
@@ -82,7 +82,7 @@ void MenuFrame::ProcessInput(bool* keyboard, bool* mouse, double mxpos, double m
 
 	auto inRect = [](Rect r, float mx, float my) {
 		// Determines if the point (mx, my) is inside the Rect r
-		my = CEngine::wndH - my;
+		my = CEngine::Instance().getWindowHeight() - my;
 		return (
 			mx >= (my - (r.tl.y - (((r.tl.y - r.bl.y) / (r.tl.x - r.bl.x)) * r.tl.x))) / ((r.tl.y - r.bl.y) / (r.tl.x - r.bl.x)) &&
 			mx <= (my - (r.tr.y - (((r.tr.y - r.br.y) / (r.tr.x - r.br.x)) * r.tr.x))) / ((r.tr.y - r.br.y) / (r.tr.x - r.br.x)) &&
@@ -122,6 +122,4 @@ void MenuFrame::Render() {
 		text->DrawText("Hold  [ i ] >> Controls", 305.0f, 220.0f, 0.35f, glm::vec3(1.0f, 1.0f, 1.0f), "Meslo.ttf");
 		text->DrawText("Press [Esc] >> Quit", 305.0f, 190.0f, 0.35f, glm::vec3(1.0f, 1.0f, 1.0f), "Meslo.ttf");
 	}
-
-	glfwSwapBuffers(engine->wnd);
 }

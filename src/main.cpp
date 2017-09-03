@@ -5,17 +5,9 @@
 int main(int argc, char* argv[]) {
 	try {
 		CEngine& game = CEngine::Instance();
-
-        game.SetCwd(argv[0]);
-
-		game.CreateWindow("K5 Engine Test", 800, 600, false);
-
+		game.Init("K5 Engine TEst", 800, 600, argv[0]);
 		game.ChangeFrame(&MenuFrame::Instance());
-
-		while (game.Running())
-			game.Tick();
-
-		game.Cleanup();
+		game.Launch();
 	}
 	catch (std::exception* e) {
 		printf("%s", e->what());

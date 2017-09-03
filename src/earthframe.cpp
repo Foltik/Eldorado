@@ -3,7 +3,7 @@
 void EarthFrame::Init(CEngine* e) {
 	engine = e;
 
-	glfwSetInputMode(engine->wnd, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+	engine->disableCursor();
 
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_CULL_FACE);
@@ -192,9 +192,6 @@ void EarthFrame::Render() {
 		glm::length(moon->p.vel),
 		glm::distance(earth->p.pos, moon->p.pos) / (float)100000000);
 	text->DrawText(std::string(moonInfo), 10.0f, 50.0f, 0.3f, glm::vec3(0.0f, 1.0f, 0.0f), "Meslo.ttf");
-
-	// End scene
-	glfwSwapBuffers(engine->wnd);
 }
 
 void EarthFrame::Reset() {
