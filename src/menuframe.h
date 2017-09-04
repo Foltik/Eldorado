@@ -44,7 +44,7 @@ private:
 	int menuState = 0;
 
 	bool showInfo;
-	Texture* menuTextures;
+	Texture** menuTextures;
 
 	GLuint vao;
 	GLuint vbo;

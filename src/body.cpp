@@ -1,12 +1,11 @@
 #include "body.h"
 
 Body::Body(const char * modelPath, const BodyProperties & props) {
-	model = new Model(modelPath);
+	model = CEngine::Instance().resourceManager().loadModel(modelPath);
 	p = props;
 }
 
 Body::~Body() {
-	delete model;
 }
 
 void Body::SetScale(float scl) {

@@ -5,10 +5,10 @@ void MenuFrame::Init(CEngine* e) {
 
 	shader = new Shader("shaders/menu.vert", "shaders/menu.frag");
 
-	menuTextures = new Texture[3];
-	menuTextures[0] = Texture("textures/menu0.png");
-	menuTextures[1] = Texture("textures/menu1.png");
-	menuTextures[2] = Texture("textures/menu2.png");
+	menuTextures = new Texture*[3];
+	menuTextures[0] = engine->resourceManager().loadTexture("menu0.png");//Texture("textures/menu0.png");
+	menuTextures[1] = engine->resourceManager().loadTexture("menu1.png");//Texture("textures/menu1.png");
+	menuTextures[2] = engine->resourceManager().loadTexture("menu2.png");//Texture("textures/menu2.png");
 
 	GLfloat vertices[] = {
 		-1.0f, -1.0f,  0.0f, 1.0f,
@@ -112,7 +112,7 @@ void MenuFrame::Render() {
 	shader->Use();
 	glActiveTexture(GL_TEXTURE0);
 	shader->uInt("tex", 0);
-	glBindTexture(GL_TEXTURE_2D, menuTextures[menuState].texture);
+	menuTextures[menuState]->Use();
 
 	glBindVertexArray(vao);
 	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);

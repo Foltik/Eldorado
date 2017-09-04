@@ -15,7 +15,7 @@ void EarthFrame::Init(CEngine* e) {
 	lshader = new Shader("shaders/lamp.vert", "shaders/lamp.frag");
 
 	// Create bodies
-	earth = new Body("models/earth.obj", {
+	earth = new Body("earth.obj", {
 		glm::vec2(0.0f, 0.0f),
 		glm::vec2(0.0f, 0.0f),
 		glm::vec2(0.0f, 0.0f),
@@ -24,7 +24,7 @@ void EarthFrame::Init(CEngine* e) {
 	});
 	earth->SetScale(0.00000004f);
 
-	moon = new Body("models/moon.obj", {
+	moon = new Body("moon.obj", {
 		glm::vec2(0.0f, 363300000.0f), // 3.633 * 10^8 m
 		glm::vec2(1076.0f, 0.0f), // 1.076 * 10^3 m/s
 		glm::vec2(0.0f, 0.0f),
@@ -34,7 +34,7 @@ void EarthFrame::Init(CEngine* e) {
 	moon->SetScale(0.00000004f);
 
 	// Load models
-	lampModel = new Model("models/lamp.obj");
+	lampModel = CEngine::Instance().resourceManager().loadModel("lamp.obj");//new Model("models/lamp.obj");
 
 	// Set up point lights
 	lights.push_back({ 
